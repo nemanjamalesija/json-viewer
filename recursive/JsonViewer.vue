@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { isJSONPrimitive, formatValue, getValueTypeClass } from '../../utils/json'
-import type { JSONValue } from '../../utils/json'
-import JsonItem from './JsonItem.vue'
+import { isJSONPrimitive, formatValue, getValueTypeClass } from '../utils/json'
+import type { JSONValue } from '../utils/json'
+import JsonItem from './JsonItem'
 
  defineProps<{
   data: JSONValue
