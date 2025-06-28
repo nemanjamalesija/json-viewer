@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { JSONValue } from '../../utils/json'
+import type { JSONValue } from '../utils/json'
+import JsonViewer from './JsonViewer'
 
 defineProps<{
   data: JSONValue
