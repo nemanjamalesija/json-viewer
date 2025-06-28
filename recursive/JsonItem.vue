@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { isObject } from '@vueuse/core'
-import type { JSONValue } from '../../utils/json'
-import { formatValue, getValueTypeClass } from '../../utils/json'
+import type { JSONValue } from '../utils/json'
+import { formatValue, getValueTypeClass } from '../utils/json'
 
 const props = defineProps<{
   itemKey: string
