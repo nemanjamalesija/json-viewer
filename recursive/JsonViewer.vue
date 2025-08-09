@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { formatValue, getValueTypeClass } from '../utils/json'
+import { formatValue, getValueTypeClass } from '../../utils/json'
 import JsonItem from './JsonItem.vue'
+
 defineProps<{
   data: unknown
 }>()
