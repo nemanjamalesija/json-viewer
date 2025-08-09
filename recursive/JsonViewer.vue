@@ -1,29 +1,24 @@
 <script setup lang="ts">
-import { isJSONPrimitive, formatValue, getValueTypeClass } from '../utils/json'
-import type { JSONValue } from '../utils/json'
-import JsonItem from './JsonItem'
-
- defineProps<{
-  data: JSONValue
+import { formatValue, getValueTypeClass } from '../utils/json'
+import JsonItem from './JsonItem.vue'
+defineProps<{
+  data: unknown
 }>()
 </script>
 
 <template>
-  <div>
-    <!-- Handle primitive root values -->
-    <div v-if="isJSONPrimitive(data)" class="text-sm px-3 py-0.5">
-      <span :class="getValueTypeClass(data)">{{ formatValue(data) }}</span>
-    </div>
-
-    <!-- Handle arrays and objects -->
-    <template v-else-if="Array.isArray(data) || typeof data === 'object'">
-      <JsonItem
-        v-for="([key, value]) in Object.entries(data)"
-        :key="key"
-        :item-key="key"
-        :value="value"
-        :depth="0"
-      />
-    </template>
-  </div>
+  <!-- Handle arrays and objects -->
+  <template v-if="data && (Array.isArray(data) || typeof data === 'object')">
+    <JsonItem
+      v-for="[key, value] in Object.entries(data)"
+      :key="key"
+      :item-key="key"
+      :value="value"
+      :depth="0"
+    />
+  </template>
+  <!-- Handle primitive root values -->
+  <template v-else>
+    <span :class="getValueTypeClass(data)">{{ formatValue(data) }}</span>
+  </template>
 </template>
