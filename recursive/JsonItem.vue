@@ -3,19 +3,23 @@ import { ref, computed } from 'vue'
 import { isObject } from '@vueuse/core'
 import type { JSONValue } from '../../utils/json'
 import { formatValue, getValueTypeClass } from '../../utils/json'
+
 const props = defineProps<{
   itemKey: string
   value: JSONValue
   depth: number
 }>()
+
 const isExpanded = ref(false)
 const isHovered = ref(false)
+
 const isExpandable = computed(() => {
   return (
     (Array.isArray(props.value) && props.value.length > 0) ||
     (isObject(props.value) && Object.keys(props.value).length > 0)
   )
 })
+
 function toggleExpansion() {
   isExpanded.value = !isExpanded.value
 }
@@ -69,33 +73,4 @@ function toggleExpansion() {
       />
     </template>
   </div>
-</template>
- 25 changes: 25 additions & 0 deletions25  
-devtools/src/panel/components/editable-json/JsonViewer.vue
-Viewed
-Original file line number	Original file line	Diff line number	Diff line change
-@@ -0,0 +1,25 @@
-<script setup lang="ts">
-import { formatValue, getValueTypeClass } from '../../utils/json'
-import JsonItem from './JsonItem.vue'
-defineProps<{
-  data: unknown
-}>()
-</script>
-
-<template>
-  <!-- Handle arrays and objects -->
-  <template v-if="data && (Array.isArray(data) || typeof data === 'object')">
-    <JsonItem
-      v-for="[key, value] in Object.entries(data)"
-      :key="key"
-      :item-key="key"
-      :value="value"
-      :depth="0"
-    />
-  </template>
-  <!-- Handle primitive root values -->
-  <template v-else>
-    <span :class="getValueTypeClass(data)">{{ formatValue(data) }}</span>
-  </template>
 </template>
